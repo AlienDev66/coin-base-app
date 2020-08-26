@@ -39,7 +39,7 @@ $ yarn dev:server # Running the api
 ### Running Web or Mobile App
 
 ```bash
-$ cd frontend/wed OR frontend/mobile # Enter to backend folder
+$ cd frontend/web OR frontend/mobile # Enter to web or mobile folder
 $ yarn # Install all dependencies
 $ yarn start # Running the project
 ```
