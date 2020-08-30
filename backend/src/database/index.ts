@@ -1,6 +1,6 @@
 import { createConnection, ConnectionOptions } from 'typeorm';
 
-const connectionOptions: ConnectionOptions = {
+const defaultConnection: ConnectionOptions = {
   type: 'sqlite',
   database: './src/database/data.sqlite',
   key: 'default',
@@ -8,4 +8,4 @@ const connectionOptions: ConnectionOptions = {
   entities: [],
 };
 
-export const typeOrmConnection = createConnection(connectionOptions);
+export const typeOrmConnection = createConnection(defaultConnection);
