@@ -11,4 +11,10 @@ typeOrmConnection
 
 app.get('/', (_, response) => response.json({ message: 'Server is up' }));
 
+const b = 8;
+
+const a = (par: number) => b === par;
+
+console.log(a(1));
+
 export default app;
