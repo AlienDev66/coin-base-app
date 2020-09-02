@@ -12,6 +12,15 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "semi": ["error", "always"],
-    "comma-dangle": ["error", "only-multiline"]
+    "comma-dangle": ["error", "only-multiline"],
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars-experimental": "error",
+    "space-before-blocks": ["error", "always"],
+
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ]
   }
 }
