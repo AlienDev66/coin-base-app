@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "${workspaceFolder:coin-base-app}/backend/src/database/database.sqlite",
+      "driver": "SQLite",
+      "name": "testando",
+      "previewLimit": 50
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}
