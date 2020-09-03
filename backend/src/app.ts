@@ -7,12 +7,10 @@ import routes from './routes';
 const app = express();
 
 typeOrmConnection
-  .then((database) => {
-    app.use(express.json());
-    app.use(routes);
-
-    console.log('Database Success', database.name);
-
-    app.listen(3333, () => console.log('server up'));
-  })
+  .then((database) => console.log('Database Success', database.name))
   .catch((err) => console.log('Database Error', err.message));
+
+app.use(express.json());
+app.use(routes);
+
+export default app;
