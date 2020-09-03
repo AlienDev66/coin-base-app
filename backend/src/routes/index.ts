@@ -6,14 +6,16 @@ const userController = new UserController();
 
 const routes = Router();
 
-routes.get('/users', async (req, res) => {
-  const a = req.body;
+routes.get('/users', async (_, res) => {
+  const userResponse = await userController.index();
 
-  console.log(a);
+  return res.status(userResponse.statusCode).json(userResponse.content);
+});
 
-  const response = await userController.index();
+routes.post('/users', async (req, res) => {
+  const userResponse = await userController.create({ request: req });
 
-  return res.json(response);
+  return res.status(userResponse.statusCode).json(userResponse.content);
 });
 
 export default routes;
