@@ -8,7 +8,7 @@ const defaultConnection: ConnectionOptions = {
   key: 'default',
   name: 'default',
   synchronize: true,
-  logging: true,
+  // logging: true,
   entities: [User],
 };
 
