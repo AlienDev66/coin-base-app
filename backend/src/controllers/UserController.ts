@@ -1,12 +1,11 @@
-// import { Request, Response } from 'express';
-import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 
 import UserRepository from '../repositories/UserRepository';
 
-interface IFunctionProps {
-  request?: Request;
-  response?: Response;
+interface ICreateUser {
+  name: string;
+  email: string;
+  password: string;
 }
 
 class UserController {
@@ -14,7 +13,10 @@ class UserController {
     try {
       const userRepository = getCustomRepository(UserRepository);
 
-      const users = await userRepository.getAll();
+      const users = (await userRepository.getAll()).map((currentUser) => ({
+        ...currentUser,
+        passwordHash: undefined,
+      }));
 
       return { statusCode: 200, content: { data: users } };
     } catch (err) {
@@ -22,11 +24,9 @@ class UserController {
     }
   }
 
-  async create({ request }: IFunctionProps) {
+  async create({ name, email, password }: ICreateUser) {
     try {
       const userRepository = getCustomRepository(UserRepository);
-
-      const { name, email, password } = request?.body;
 
       const userReturnedInSearchByEmail = await userRepository.findByEmail({
         email,

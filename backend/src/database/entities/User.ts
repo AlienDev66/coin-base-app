@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import bcrypt from 'bcrypt';
+import { cryptData } from '../../utils/cryptDecrypt';
 
 @Entity('users')
 class User {
@@ -31,7 +31,7 @@ class User {
 
   @BeforeInsert()
   async createNewPasswordHash() {
-    this.passwordHash = bcrypt.hashSync(this.passwordHash, 10);
+    this.passwordHash = cryptData(this.passwordHash);
   }
 }
 
