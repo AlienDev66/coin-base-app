@@ -1,25 +1,39 @@
-import { Response, Request } from 'express';
 import { getCustomRepository } from 'typeorm';
-import UserRepository from '../repositories/UserRepositoty';
+import UserRepository from '../repositories/UserRepository';
+import { compareCryptedData } from '../utils/cryptDecrypt';
 
-interface SessionControllerProps {
-  request?: Request;
-  response?: Response;
+interface ICreateSeesion {
+  email: string;
+  password: string;
 }
 
 class SessionController {
-  async create({ request }: SessionControllerProps) {
+  async create({ email, password }: ICreateSeesion) {
     try {
       const userRepository = getCustomRepository(UserRepository);
-
-      const { email } = request?.body;
 
       const user = await userRepository.findByEmail({ email });
 
       if (!user) {
-        return { statusCode: 401, content: { error: "User doesn't exists!" } };
+        return { statusCode: 400, content: { error: "User doesn't exist!" } };
       }
-    } catch (err) {}
+
+      const isPasswordMatch = compareCryptedData(user.passwordHash, password);
+
+      if (!isPasswordMatch) {
+        return { statusCode: 401, content: { error: 'Incorrect password' } };
+      }
+
+      return {
+        statusCode: 200,
+        content: { data: { ...user, passwordHash: undefined } },
+      };
+    } catch (err) {
+      return {
+        statusCode: 400,
+        content: { error: err.message },
+      };
+    }
   }
 }
 
