@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 
-import UserRepository from '../repositories/UserRepositoty';
+import UserRepository from '../repositories/UserRepository';
 
 interface IFunctionProps {
   request?: Request;
