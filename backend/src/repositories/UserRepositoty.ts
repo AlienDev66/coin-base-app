@@ -5,6 +5,12 @@ interface IFindByEmail {
   email: string;
 }
 
+interface ICreateOne {
+  email: string;
+  name: string;
+  password: string;
+}
+
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
   findByEmail({ email }: IFindByEmail) {
@@ -13,6 +19,16 @@ class UserRepository extends Repository<User> {
 
   getAll() {
     return this.find();
+  }
+
+  createOne({ name, email, password: passwordHash }: ICreateOne) {
+    const newUserToSave = this.create({
+      name,
+      email,
+      passwordHash,
+    });
+
+    return this.save(newUserToSave);
   }
 }
 

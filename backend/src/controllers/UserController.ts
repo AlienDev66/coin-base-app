@@ -36,18 +36,16 @@ class UserController {
         return { statusCode: 409, content: { error: 'User already exists!' } };
       }
 
-      const newUserToSave = userRepository.create({
+      const newUserSaved = await userRepository.createOne({
         name,
         email,
-        passwordHash: password,
+        password,
       });
-
-      await userRepository.save(newUserToSave);
 
       return {
         statusCode: 201,
         content: {
-          data: { ...newUserToSave, passwordHash: undefined },
+          data: { ...newUserSaved, passwordHash: undefined },
           message: 'User Created!',
         },
       };
