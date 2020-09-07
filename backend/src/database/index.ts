@@ -1,6 +1,6 @@
 import { createConnection, ConnectionOptions } from 'typeorm';
 
-import { User } from './entities';
+import { Card, User } from './entities';
 
 const defaultConnection: ConnectionOptions = {
   type: 'sqlite',
@@ -9,7 +9,7 @@ const defaultConnection: ConnectionOptions = {
   name: 'default',
   synchronize: true,
   // logging: true,
-  entities: [User],
+  entities: [User, Card],
 };
 
 export const typeOrmConnection = createConnection(defaultConnection);
