@@ -14,25 +14,17 @@ class Card {
   @Column('varchar', { nullable: false })
   toHexadecimalColor!: string;
 
-  @Column('boolean', { default: true })
-  hasBackgroundColor!: boolean;
-
   @Column('varchar', { nullable: false })
-  fullLogo!: string;
+  logo!: string;
 
-  @Column('varchar', { nullable: false })
-  shortLogo!: string;
-
-  fullLogoLink!: string;
-  shortLogoLink!: string;
+  logoLink!: string;
 
   @BeforeInsert()
   addLinks() {
     const createLinkToImage = (idImage: string) =>
-      `http://localhost:3333/images/cards/${idImage}`;
+      `http://localhost:3333/images/cards/${idImage}.svg`;
 
-    this.fullLogoLink = createLinkToImage(this.fullLogo);
-    this.shortLogoLink = createLinkToImage(this.shortLogo);
+    this.logoLink = createLinkToImage(this.logo);
   }
 }
 
